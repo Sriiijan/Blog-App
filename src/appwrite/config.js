@@ -8,8 +8,8 @@ export class Service {
 
     constructor() {
         this.client
-            .setEndpoint(conf.apperiteUrl)
-            .setProject(apperiteProjectId)
+            .setEndpoint(conf.appwriteUrl)
+            .setProject(appwriteProjectId)
         this.databses= new Databses(this.client);
         this.bucket= new Storage(this.client);
     }
@@ -17,8 +17,8 @@ export class Service {
     async createPost({title, slug, content, featuredImage, status, userId}) {
         try {
             return await this.databses.createDocument(
-                conf.apperiteDatabaseId,
-                conf.apperiteCollectionId,
+                conf.appwriteDatabaseId,
+                conf.appwriteCollectionId,
                 slug,
                 {
                     title,
@@ -36,8 +36,8 @@ export class Service {
     async updatePost(slug, {title, content, featuredImage, status}) {
         try {
             return await this.databses.updateDocument(
-                conf.apperiteDatabaseId,
-                conf.apperiteCollectionId,
+                conf.appwriteDatabaseId,
+                conf.appwriteCollectionId,
                 slug,
                 {
                     title,
@@ -54,8 +54,8 @@ export class Service {
     async deletePost(slug) {
         try {
             await this.databses.deleteDocument(
-                conf.apperiteDatabaseId,
-                conf.apperiteCollectionId,
+                conf.appwriteDatabaseId,
+                conf.appwriteCollectionId,
                 slug
             )
             return true
@@ -68,8 +68,8 @@ export class Service {
     async getPost(slug) {
         try {
             return await this.databses.getDocument(
-                conf.apperiteDatabaseId,
-                conf.apperiteCollectionId,
+                conf.appwriteDatabaseId,
+                conf.appwriteCollectionId,
                 slug,
             )
         } catch (error) {
@@ -81,8 +81,8 @@ export class Service {
     async getPosts(queries= [Query.equal("status", "active")]) {
         try {
             return await this.databses.listDocument(
-                conf.apperiteDatabaseId,
-                conf.apperiteCollectionId,
+                conf.appwriteDatabaseId,
+                conf.appwriteCollectionId,
                 queries,
             )
         } catch (error) {
@@ -95,7 +95,7 @@ export class Service {
     async uploadFile(file) {
         try {
             return await this.bucket.createFile(
-                conf.apperiteBucketId,
+                conf.appwriteBucketId,
                 ID.unique(),
                 file
             )
@@ -109,7 +109,7 @@ export class Service {
     async uploadFile(fileId) {
         try {
             return await this.bucket.deleteFile(
-                conf.apperiteBucketId,
+                conf.appwriteBucketId,
                 fileId
             )
         } catch (error) {
@@ -121,7 +121,7 @@ export class Service {
     async getFilePreview(fileId) {
         try {
             return await this.bucket.getFilePreview(
-                conf.apperiteBucketId,
+                conf.appwriteBucketId,
                 fileId
             )
         } catch (error) {
