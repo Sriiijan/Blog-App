@@ -25,6 +25,12 @@ function Signup() {
         setError(error.message)
       }
     }
+
+//     const create = (data) => {
+//   console.log("Form submitted:", data);
+//   // your axios/fetch call here
+// };
+
   return (
     <div className="flex items-center justify-center">
         <div className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`}>
@@ -44,52 +50,53 @@ function Signup() {
                 </Link>
             </p>
             {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
-        </div>
-        <form onSubmit={handleSubmit(create)} className='mt-8'>
-            <div className='space-y-5'>
-                <Input 
-                label="Name: "
-                placeholder= "Enter your name"
-                type= "name"
-                {...register(register("name", {
-                  required: true
-                }))}
-                />
+            <form onSubmit={handleSubmit(create)} className='mt-8'>
+              <div className='space-y-5'>
+                    <Input 
+                      label="Name: "
+                      placeholder= "Enter your name"
+                      type= "name"
+                      {...register("name", {
+                        required: true
+                      })}
+                    />
 
-                <Input
-                label="Email: "
-                placeholder= "Enter your email"
-                type= "email"
-                {...register(register("email", {
-                  required: true,
-                  validate: {
-                      matchPatern: (value) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) || "Email address must be a valid address"
-                  }
-                }))}
-                />
+                    <Input
+                      label="Email: "
+                      placeholder= "Enter your email"
+                      type= "email"
+                      {...register("email", {
+                        required: true,
+                        validate: {
+                            matchPatern: (value) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) || "Email address must be a valid address"
+                        }
+                      })}
+                    />
 
-                <Input
-                label= "Password"
-                placeholder= "Enter your password"
-                type= "password"
-                {...register("password", {
-                    required: true,
-                    validate: {
-                        matchPattern: (value) =>
-                        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
-                            .test(value) || 
-                        "Password must be at least 8 characters long, include uppercase, lowercase, number, and special character"
-                    }
-                })}
-                /> 
-                <Button
-                type='submit'
-                className='w-full'
-                >
-                    Create Account
-                </Button>
-            </div>
+                    <Input
+                      label= "Password"
+                      placeholder= "Enter your password"
+                      type= "password"
+                      {...register("password", {
+                          required: true,
+                          validate: {
+                              matchPattern: (value) =>
+                              /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+                                  .test(value) || 
+                              "Password must be at least 8 characters long, include uppercase, lowercase, number, and special character"
+                          }
+                      })}
+                    /> 
+                    <Button
+                      type='submit'
+                      className='w-full'
+                      >
+                          Create Account
+                    </Button>
+              </div>
         </form>
+        </div>
+        
     </div>
   )
 }
