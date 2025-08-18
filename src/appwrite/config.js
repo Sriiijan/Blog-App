@@ -117,16 +117,12 @@ export class Service {
         }
     }
 
-    // file preview
-    async getFilePreview(fileId) {
-        try {
-            return this.bucket.getFilePreview(
+    // file view
+    getFilePreview(fileId) {
+        return this.bucket.getFileView(
                 conf.appwriteBucketId,
                 fileId
             )
-        } catch (error) {
-            console.log("Appwirite File Preview Error: ",error)
-        }
     }
 }
 
